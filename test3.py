@@ -1,16 +1,14 @@
 import time
-#using subprocess module
+#using subprocess module for runnig shell scripts
 import subprocess
 import os
-#pyautogui for typing??     check this further
-#import pyautogui
-#rC:\Users\38598\Downloads\yasara\YASARA.exe   (r to make the string raw)
-p1 = os.system("foldx.exe ")
-time.sleep(2)
-#yay this part works albeit slowly because yasara is written in potatospeak
+import shlex   #makes it easy to pass arguments to shell functions
 
-#print(p1.stdout)
-#
-#yasara commands:
-#        LoadPDB C:\...\.pdb
-#pyautogui.typewrite("brunoni babe",interval=0.25)
+pdb_file = 'antibody.pdb'  #change this to system output using os package
+args = 'SequenceOnly '
+command_string = './foldx --command=' + args + '--pdb=' + pdb_file
+
+###  foldx command tutorial (official manual useless) at
+### https://evosite3d.blogspot.com/2016/04/tutorial-estimating-stability-effect-of.html
+
+subprocess.call(shlex.split(command_string))   # Runs the foldx script
